@@ -1,5 +1,5 @@
 import { Todo } from "../../Domain/Models/Todo";
-import axios from "axios";
+import { Http } from "../../Services/Http";
 
 export interface TodoDataSource {
   getTodos(): Promise<Todo[]>;
@@ -8,7 +8,7 @@ export interface TodoDataSource {
 
 export class TodoDataSourceImpl implements TodoDataSource {
   async getTodos() {
-    const res = await axios.get<Todo[]>(
+    const res = await Http.get<Todo[]>(
       "https://jsonplaceholder.typicode.com/todos"
     );
 
@@ -16,7 +16,7 @@ export class TodoDataSourceImpl implements TodoDataSource {
   }
 
   async createTodo(todo: Todo) {
-    const res = await axios.post<Todo>(
+    const res = await Http.post<Todo>(
       "https://jsonplaceholder.typicode.com/todos",
       todo
     );

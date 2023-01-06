@@ -1,9 +1,13 @@
 import { TodoRepositoryImpl } from "../../Data/Repositories/TodoRepositoryImpl";
 import { Todo } from "../../Domain/Models/Todo";
+import { Notification } from "../../Services/Notification";
 
-// TODO: How to handle Notifications?
 export async function CreateTodo(repository: TodoRepositoryImpl, todo: Todo) {
-  const res = await repository.createTodo(todo);
-  console.log("Success!");
-  return res;
+  try {
+    const res = await repository.createTodo(todo);
+    Notification.error("Successfully Created!");
+    return res;
+  } catch (err) {
+    Notification.success("Successfully Created!");
+  }
 }
