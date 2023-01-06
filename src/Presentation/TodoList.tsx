@@ -3,7 +3,9 @@ import * as React from "react";
 import { GetTodos } from "../Domain/UseCases/GetTodos";
 import { TodoRepositoryImpl } from "../Data/Repositories/TodoRepositoryImpl";
 import { TodoDataSourceImpl } from "../Data/DataSources/TodoDataSource";
+import { CreateTodo } from "../Domain/UseCases/CreateTodo";
 
+// TODO: Conviene tenere insieme i due useCase implementati?
 export function useViewModel() {
   const [data, setData] = React.useState<Todo[]>([]);
 
@@ -11,18 +13,35 @@ export function useViewModel() {
     setData(await GetTodos(new TodoRepositoryImpl(new TodoDataSourceImpl())));
   }, []);
 
+  const createTodo = React.useCallback(async (todo: Todo) => {
+    return await CreateTodo(
+      new TodoRepositoryImpl(new TodoDataSourceImpl()),
+      todo
+    );
+  }, []);
+
   return {
     todos: data,
     getTodos,
+    createTodo,
   };
 }
 
 export function TodoList() {
-  const { todos, getTodos } = useViewModel();
+  const { todos, getTodos, createTodo } = useViewModel();
 
   React.useEffect(() => {
     getTodos();
   }, []);
+
+  // TODO: How to handle different parameters for APIs?
+  const onClick = () => {
+    createTodo({
+      title: "This is a nice Todo",
+      completed: false,
+      userId: 1,
+    });
+  };
 
   return (
     <fieldset>
@@ -32,6 +51,10 @@ export function TodoList() {
           <li key={todo.id}>{todo.title}</li>
         ))}
       </ul>
+
+      <button type="button" onClick={onClick}>
+        Create New
+      </button>
     </fieldset>
   );
 }

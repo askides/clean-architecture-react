@@ -12,4 +12,8 @@ export class TodoRepositoryImpl implements TodoRepository {
   async getTodos(): Promise<Todo[]> {
     return await this.datasource.getTodos();
   }
+
+  async createTodo(todo: Todo): Promise<Todo> {
+    return this.datasource.createTodo(todo);
+  }
 }

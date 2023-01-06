@@ -29,7 +29,9 @@ export function UserList() {
       <legend>User List</legend>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.username}</li>
+          <li key={user.id}>
+            {user.username} - {user.email}
+          </li>
         ))}
       </ul>
     </fieldset>

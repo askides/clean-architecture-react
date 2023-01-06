@@ -1,3 +1,14 @@
-# clean-architecture-react
+# Clean Architecture Experiment
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-fczrhv)
+## Models
+
+- Todo
+- User
+
+## UseCases
+
+- GetTodos
+- CreateTodo
+- GetUsers
+
+> GetUsers by way of example has an additional layer using a DTO to enhance API response flexibility.
