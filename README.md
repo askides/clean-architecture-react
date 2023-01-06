@@ -1,5 +1,7 @@
 # Clean Architecture Experiment
 
+Currently just a try of implementing clean architecture in a React application.
+
 ## Models
 
 - Todo
@@ -11,7 +13,7 @@
 
 Obtain the Todo list from an API.
 
-### CreateTodo
+### CreateTodo
 
 Simulate a creation of a new Todo, with a response handler using the notification service.
 
