@@ -8,9 +8,7 @@ export interface UserDataSource {
 
 export class UserDataSourceImpl implements UserDataSource {
   async getUsers(): Promise<User[]> {
-    const res = await Http.get<UserDTO[]>(
-      "https://jsonplaceholder.typicode.com/users"
-    );
+    const res = await Http.get<UserDTO[]>("/users");
 
     return res.data.map((x) => this.mapToModel(x));
   }

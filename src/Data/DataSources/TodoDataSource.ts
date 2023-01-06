@@ -8,18 +8,13 @@ export interface TodoDataSource {
 
 export class TodoDataSourceImpl implements TodoDataSource {
   async getTodos() {
-    const res = await Http.get<Todo[]>(
-      "https://jsonplaceholder.typicode.com/todos"
-    );
+    const res = await Http.get<Todo[]>("/todos");
 
     return res.data;
   }
 
   async createTodo(todo: Todo) {
-    const res = await Http.post<Todo>(
-      "https://jsonplaceholder.typicode.com/todos",
-      todo
-    );
+    const res = await Http.post<Todo>("/todos", todo);
 
     return res.data;
   }
