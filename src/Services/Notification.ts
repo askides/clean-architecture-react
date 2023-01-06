@@ -1,4 +1,6 @@
-export const useNotification = {
-  success: (message: string) => alert(message),
-  error: (message: string) => alert(message),
+export const useNotification = () => {
+  return {
+    success: (message: string) => alert(message),
+    error: (message: string) => alert(message),
+  };
 };
