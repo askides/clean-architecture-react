@@ -6,6 +6,7 @@ import { TodoDataSourceImpl } from "../Data/DataSources/TodoDataSource";
 import { CreateTodo } from "../Domain/UseCases/CreateTodo";
 import { useApi } from "../Services/useApi";
 import { useMutation } from "@tanstack/react-query";
+import { User } from "../Domain/Models/User";
 
 // TODO: Conviene tenere insieme i due useCase implementati?
 export function useViewModel() {
@@ -42,7 +43,7 @@ export function TodoList() {
     data: createdTodo,
     exec: createTodo,
     isPending: isCreateTodoPending,
-  } = useApi((todo: Omit<Todo, "id">) =>
+  } = useApi((todo: Omit<User, "id">) =>
     CreateTodo(new TodoRepositoryImpl(new TodoDataSourceImpl()), todo)
   );
 
