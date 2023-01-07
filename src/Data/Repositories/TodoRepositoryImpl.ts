@@ -13,7 +13,7 @@ export class TodoRepositoryImpl implements TodoRepository {
     return await this.datasource.getTodos();
   }
 
-  async createTodo(todo: Todo): Promise<Todo> {
+  async createTodo(todo: Omit<Todo, "id">): Promise<Todo> {
     return this.datasource.createTodo(todo);
   }
 }

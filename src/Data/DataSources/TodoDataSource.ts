@@ -3,7 +3,7 @@ import { Http } from "../../Services/Http";
 
 export interface TodoDataSource {
   getTodos(): Promise<Todo[]>;
-  createTodo(todo: Todo): Promise<Todo>;
+  createTodo(todo: Omit<Todo, "id">): Promise<Todo>;
 }
 
 export class TodoDataSourceImpl implements TodoDataSource {
@@ -13,7 +13,7 @@ export class TodoDataSourceImpl implements TodoDataSource {
     return res.data;
   }
 
-  async createTodo(todo: Todo) {
+  async createTodo(todo: Omit<Todo, "id">) {
     const res = await Http.post<Todo>("/todos", todo);
 
     return res.data;
