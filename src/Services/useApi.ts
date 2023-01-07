@@ -5,7 +5,8 @@ interface UseApiConfig<T> {
   initialData?: T;
 }
 
-type ApiFunction<T = unknown> = (...args: unknown[]) => T | Promise<T>;
+// type ApiFunction<T = unknown> = (...args: unknown[]) => T | Promise<T>;
+type ApiFunction<T = unknown> = (variables: T) => T | Promise<T>;
 
 export function useApi<TData = unknown, TError = unknown>(
   fn: ApiFunction<TData>,
@@ -16,10 +17,10 @@ export function useApi<TData = unknown, TError = unknown>(
   const [error, setError] = React.useState<TError | unknown>();
   const { status, setStatus, ...normalizedStatuses } = useApiStatus();
 
-  const exec = async <A>(...args: A[]) => {
+  const exec = async (variables: TData) => {
     try {
       setStatus(PENDING);
-      const data = await fn(...args);
+      const data = await fn(variables);
       setData(data);
       setStatus(SUCCESS);
 
