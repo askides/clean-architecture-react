@@ -46,7 +46,7 @@ export function TodoList() {
     CreateTodo(new TodoRepositoryImpl(new TodoDataSourceImpl()), todo)
   );
 
-  const createTodoApi = useApi<Todo>((todo: Omit<Todo, "id">) =>
+  const createTodoApi = useApi((todo: Omit<Todo, "id">) =>
     CreateTodo(new TodoRepositoryImpl(new TodoDataSourceImpl()), todo)
   );
 
