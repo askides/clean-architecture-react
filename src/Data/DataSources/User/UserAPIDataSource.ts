@@ -1,6 +1,6 @@
-import { UserDTO } from "../../Data/DTOs/UserDTO";
-import { User } from "../../Domain/Models/User";
-import { Http } from "../../Services/Http";
+import { UserDTO } from "../../../Data/DTOs/UserDTO";
+import { User } from "../../../Domain/Models/User";
+import { Http } from "../../../Services/Http";
 
 export interface UserDataSource {
   getUsers(): Promise<User[]>;
@@ -9,7 +9,6 @@ export interface UserDataSource {
 export class UserDataSourceImpl implements UserDataSource {
   async getUsers(): Promise<User[]> {
     const res = await Http.get<UserDTO[]>("/users");
-
     return res.data.map((x) => this.mapToModel(x));
   }
 

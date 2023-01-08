@@ -1,5 +1,5 @@
 import { UserRepositoryImpl } from "../../Data/Repositories/UserRepositoryImpl";
-import { UserDataSourceImpl } from "../../Data/DataSources/UserDataSource";
+import { UserDataSourceImpl } from "../../Data/DataSources/User/UserAPIDataSource";
 import { useFetchUsers } from "../../Domain/UseCases/useFetchUsers";
 
 export function UserList() {
