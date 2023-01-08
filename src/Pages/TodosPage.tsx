@@ -1,4 +1,3 @@
-import { CreateTodo } from "../Domain/UseCases/CreateTodo";
 import { CreateTodoForm } from "../Presentation/CreateTodoForm";
 import { TodoList } from "../Presentation/TodoList";
 import { Layout } from "../UI/Layout";
