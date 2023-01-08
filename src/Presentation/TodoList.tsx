@@ -1,33 +1,29 @@
-import { Todo } from "../Domain/Models/Todo";
-import { GetTodos } from "../Domain/UseCases/GetTodos";
 import { TodoRepositoryImpl } from "../Data/Repositories/TodoRepositoryImpl";
 import { TodoDataSourceImpl } from "../Data/DataSources/TodoDataSource";
-import { useQuery } from "@tanstack/react-query";
-import { Http } from "../Services/Http";
-
-// Repository
-const useTodosQuery = () => {
-  const { data, isLoading } = useQuery<Todo[]>({
-    queryKey: ["todos"],
-    queryFn: () => Http.get<Todo[]>("/todos").then((res) => res.data),
-    // queryFn: () => GetTodos(new TodoRepositoryImpl(new TodoDataSourceImpl())),
-  });
-
-  return { data, isLoading };
-};
-
-// UseCase
-const useDisplayTodos = () => {
-  const { data, isLoading } = useTodosQuery();
-
-  return {
-    todos: data,
-    isFetchTodosLoading: isLoading,
-  };
-};
+import { useFetchTodos } from "../Domain/UseCases/useFetchTodos";
+import { useCreateTodo } from "../Domain/UseCases/useCreateTodo";
 
 export function TodoList() {
-  const { todos, isFetchTodosLoading } = useDisplayTodos();
+  const { todos, isFetchTodosLoading } = useFetchTodos(
+    new TodoRepositoryImpl(new TodoDataSourceImpl())
+  );
+
+  const createTodo = useCreateTodo(
+    new TodoRepositoryImpl(new TodoDataSourceImpl())
+  );
+
+  const onClick = async () => {
+    createTodo.mutate(
+      {
+        title: "Giggi",
+        completed: false,
+        userId: 3,
+      },
+      {
+        onSuccess: (res) => console.log("Creato", res),
+      }
+    );
+  };
 
   return (
     <fieldset>
@@ -42,6 +38,10 @@ export function TodoList() {
           ))}
         </ul>
       )}
+
+      <button type="button" onClick={onClick}>
+        {createTodo.isLoading ? "Creating.." : "Create New"}
+      </button>
     </fieldset>
   );
 }

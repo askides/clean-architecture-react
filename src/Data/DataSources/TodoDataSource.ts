@@ -19,3 +19,33 @@ export class TodoDataSourceImpl implements TodoDataSource {
     return res.data;
   }
 }
+
+const data: Todo[] = [
+  {
+    id: 1,
+    title: "A nice Todo",
+    completed: false,
+    userId: 2,
+  },
+];
+
+export class TodoInMemoryDataSourceImpl implements TodoDataSource {
+  async getTodos() {
+    console.log("Called GetTodos", data);
+    return new Promise<Todo[]>((resolve) => resolve(data));
+  }
+
+  async createTodo(todo: Omit<Todo, "id">) {
+    return new Promise<Todo>((resolve) => {
+      const id = Date.now();
+      const newTodo = {
+        id,
+        title: "The NICE Todo",
+        completed: false,
+        userId: 1,
+      };
+      data.push(newTodo);
+      resolve(newTodo);
+    });
+  }
+}
