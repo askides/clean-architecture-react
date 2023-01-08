@@ -1,6 +1,6 @@
-import { CreateTodoForm } from "../Presentation/CreateTodoForm";
-import { TodoList } from "../Presentation/TodoList";
-import { Layout } from "../UI/Layout";
+import { CreateTodoForm } from "../../Todo/CreateTodoForm";
+import { TodoList } from "../../Todo/TodoList";
+import { Layout } from "../Components/Layout";
 
 export function TodosPage() {
   return (

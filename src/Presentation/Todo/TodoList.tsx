@@ -1,6 +1,6 @@
-import { useFetchTodos } from "../Domain/UseCases/useFetchTodos";
-import { TodoRepositoryImpl } from "../Data/Repositories/TodoRepositoryImpl";
-import { TodoLocalStorageDataSource } from "../Data/DataSources/Todo/TodoLocalStorageDataSource";
+import { useFetchTodos } from "../../Domain/UseCases/useFetchTodos";
+import { TodoRepositoryImpl } from "../../Data/Repositories/TodoRepositoryImpl";
+import { TodoLocalStorageDataSource } from "../../Data/DataSources/Todo/TodoLocalStorageDataSource";
 
 export function TodoList() {
   const { todos, isFetchTodosLoading } = useFetchTodos(

@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-import { UserList } from "../Presentation/UserList";
-import { Layout } from "../UI/Layout";
+import { UserList } from "../../User/UserList";
+import { Layout } from "../Components/Layout";
 
 export function UsersPage() {
   return (
