@@ -1,27 +1,11 @@
-# Clean Architecture Experiment
+# Clean Architecture React
 
-Currently just a try of implementing clean architecture in a React application.
+This open source project is an experiment in applying clean architecture with React.
 
-## Models
+The project contains two models: User and Todo and there are four use cases: useClearTodos, useCreateTodo, useFetchTodos, and useFetchUsers.
 
-- Todo
-- User
+These use cases are implemented using react-query, a library for fetching and caching data in React applications.
 
-## UseCases
+The Todo model has two data source implementations available: one using a REST API and the other using local storage.
 
-### GetTodos
-
-Obtain the Todo list from an API. (Using a React-Query Query)
-
-### CreateTodo
-
-Simulate a creation of a new Todo, with a response handler using the notification service. (Using a React-Query Mutation)
-
-### GetUsers
-
-Obtain the User list from an API. This use case has an additional layer using a DTO to enhance API response flexibility. (Using a custom handmade hook useApi).
-
-## Services
-
-- Http (Abstraction of API Client, currently using axios).
-- Notification (Abstraction for Notifications, currrently using alerts).
+There are also 3 abstract services available: Http, Notification and Logger.
