@@ -1,16 +1,17 @@
-import { Todo } from "../../Domain/Models/Todo";
-import { TodoRepositoryImpl } from "../../Data/Repositories/TodoRepositoryImpl";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNotification } from "../../Services/useNotification";
+import { Todo } from "../../Domain/Models/Todo";
+import { useAppServicesContainer } from "../../Services/AppServicesContainer";
 import { useLogger } from "../../Services/useLogger";
+import { useNotification } from "../../Services/useNotification";
 
-export const useCreateTodo = (repository: TodoRepositoryImpl) => {
+export const useCreateTodo = () => {
+  const { todoRepository } = useAppServicesContainer()
   const logger = useLogger();
   const notify = useNotification();
   const queryClient = useQueryClient();
 
   const createTodo = useMutation({
-    mutationFn: (todo: Omit<Todo, "id">) => repository.createTodo(todo),
+    mutationFn: (todo: Omit<Todo, "id">) => todoRepository.createTodo(todo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       notify.success("Created Correctly!");
