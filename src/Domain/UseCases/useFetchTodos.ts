@@ -1,11 +1,12 @@
-import { Todo } from "../../Domain/Models/Todo";
 import { useQuery } from "@tanstack/react-query";
-import { TodoRepositoryImpl } from "../../Data/Repositories/TodoRepositoryImpl";
+import { Todo } from "../../Domain/Models/Todo";
+import { useAppServicesContainer } from "../../Services/AppServicesContainer";
 
-export const useFetchTodos = (repository: TodoRepositoryImpl) => {
+export const useFetchTodos = () => {
+  const { todoRepository } = useAppServicesContainer()
   const { data, isLoading } = useQuery<Todo[]>({
     queryKey: ["todos"],
-    queryFn: () => repository.getTodos(),
+    queryFn: () => todoRepository.getTodos(),
   });
 
   return {

@@ -1,22 +1,16 @@
 import * as React from "react";
-import { useCreateTodo } from "../../Domain/UseCases/useCreateTodo";
-import { TodoRepositoryImpl } from "../../Data/Repositories/TodoRepositoryImpl";
-import { TodoLocalStorageDataSource } from "../../Data/DataSources/Todo/TodoLocalStorageDataSource";
-import { useNotification } from "../../Services/useNotification";
 import { useClearTodos } from "../../Domain/UseCases/useClearTodos";
+import { useCreateTodo } from "../../Domain/UseCases/useCreateTodo";
+import { useNotification } from "../../Services/useNotification";
 
 export function CreateTodoForm() {
   const notify = useNotification();
   const inputRef = React.useRef<HTMLInputElement>(null);
   const formRef = React.useRef<HTMLFormElement>(null);
 
-  const createTodo = useCreateTodo(
-    new TodoRepositoryImpl(new TodoLocalStorageDataSource())
-  );
+  const createTodo = useCreateTodo();
 
-  const clearTodos = useClearTodos(
-    new TodoRepositoryImpl(new TodoLocalStorageDataSource())
-  );
+  const clearTodos = useClearTodos();
 
   const handleCreate = async () => {
     const title = inputRef.current?.value;

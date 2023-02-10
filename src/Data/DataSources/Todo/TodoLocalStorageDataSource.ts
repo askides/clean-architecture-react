@@ -2,7 +2,7 @@ import { TodoDataSource } from "../../../Data/DataSources/Todo/TodoDataSource";
 import { Todo } from "../../../Domain/Models/Todo";
 
 export class TodoLocalStorageDataSource implements TodoDataSource {
-  STORAGE_KEY = "Todos";
+  private STORAGE_KEY = "Todos";
 
   async getTodos() {
     return new Promise<Todo[]>((resolve) => {
@@ -26,12 +26,12 @@ export class TodoLocalStorageDataSource implements TodoDataSource {
     });
   }
 
-  getItems() {
+  private getItems() {
     const raw = localStorage.getItem(this.STORAGE_KEY);
     return raw === null ? [] : JSON.parse(raw);
   }
 
-  setItems(items: Todo[]) {
+  private setItems(items: Todo[]) {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items));
   }
 }

@@ -1,11 +1,12 @@
-import { User } from "../../Domain/Models/User";
 import { useQuery } from "@tanstack/react-query";
-import { UserRepositoryImpl } from "../../Data/Repositories/UserRepositoryImpl";
+import { User } from "../../Domain/Models/User";
+import { useAppServicesContainer } from "../../Services/AppServicesContainer";
 
-export const useFetchUsers = (repository: UserRepositoryImpl) => {
+export const useFetchUsers = () => {
+  const { userRepository } = useAppServicesContainer()
   const { data, isLoading, isError, isSuccess } = useQuery<User[]>({
     queryKey: ["users"],
-    queryFn: () => repository.getUsers(),
+    queryFn: () => userRepository.getUsers(),
   });
 
   return {
